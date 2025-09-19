@@ -5,11 +5,13 @@
 package lab_04;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -26,6 +28,7 @@ public class Lab_04 extends Application {
     
     @Override
     public void start(Stage stage) {
+        // ----STRUCTURE----
         BorderPane root = new BorderPane();
         
         GridPane grid = new GridPane();      
@@ -36,6 +39,7 @@ public class Lab_04 extends Application {
         
         root.setCenter(grid);
         
+        // ----USER INFO----
         Label daysLabel = new Label("Days spent: ");
         TextField days = new TextField();
         grid.add(daysLabel, 0, 0);
@@ -76,6 +80,7 @@ public class Lab_04 extends Application {
         grid.add(lodgingChargesLabel, 0, 7);
         grid.add(lodgingCharges, 1, 7);
         
+        // ----SHOW SCENE----
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
