@@ -121,12 +121,17 @@ public class Lab_04 extends Application {
         Text excess = new Text();
         grid.add(excessLabel, 2, 9);
         grid.add(excess, 3, 9);
+        
+        Label savedLabel = new Label("Amount saved: ");
+        Text saved = new Text();
+        grid.add(savedLabel, 2, 10);
+        grid.add(saved, 3, 10);
 
         // ----CALCULATIONS----
         Button saveButton = new Button("Save");
         Text status = new Text();
         grid.add(saveButton, 0, 9);
-        grid.add(status, 1, 9);
+        grid.add(status, 0, 10);
         
         saveButton.setOnAction((ActionEvent t) -> {
             try {
@@ -166,6 +171,15 @@ public class Lab_04 extends Application {
                 }
                 
                 excess.setText(String.valueOf(excessDouble));
+                
+                double savedDouble;
+                if (Double.parseDouble(expenses.getText()) < Double.parseDouble(allowance.getText())) {
+                    savedDouble = Double.parseDouble(expenses.getText());
+                } else {
+                    savedDouble = Double.parseDouble(allowance.getText());
+                }
+                
+                saved.setText(String.valueOf(savedDouble));
                 
                 status.setText("Success!");
             } catch (NumberFormatException e) {
