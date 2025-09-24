@@ -33,10 +33,10 @@ public class Lab_04 extends Application {
         BorderPane root = new BorderPane();
         
         GridPane grid = new GridPane();      
-        grid.setAlignment(Pos.TOP_LEFT);
+        grid.setAlignment(Pos.CENTER);
         grid.setVgap(10);
-        grid.setHgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
+        grid.setHgap(20);
+        grid.setPadding(new Insets(50, 50, 50, 50));
         
         root.setCenter(grid);
         
@@ -71,7 +71,7 @@ public class Lab_04 extends Application {
         grid.add(taxiChargesLabel, 0, 5);
         grid.add(taxiCharges, 1, 5);
         
-        Label registrationFeesLabel = new Label("Conference registration fees: ");
+        Label registrationFeesLabel = new Label("Conference fees: ");
         TextField registrationFees = new TextField();
         grid.add(registrationFeesLabel, 0, 6);
         grid.add(registrationFees, 1, 6);
@@ -116,6 +116,11 @@ public class Lab_04 extends Application {
         Text allowance = new Text();
         grid.add(allowanceLabel, 2, 8);
         grid.add(allowance, 3, 8);
+        
+        Label excessLabel = new Label("Excess spending: ");
+        Text excess = new Text();
+        grid.add(excessLabel, 2, 9);
+        grid.add(excess, 3, 9);
 
         // ----CALCULATIONS----
         Button saveButton = new Button("Save");
@@ -133,7 +138,6 @@ public class Lab_04 extends Application {
                 int taxiChargesInt = Integer.parseInt(taxiCharges.getText());
                 int registrationFeesInt = Integer.parseInt(registrationFees.getText());
                 int lodgingChargesInt = Integer.parseInt(lodgingCharges.getText());
-                status.setText("Success!");
                 
                 mealsReimbursal.setText(String.valueOf(37.0 * daysInt));
                 parkingReimbursal.setText(String.valueOf(10.0 * daysInt));
@@ -143,8 +147,8 @@ public class Lab_04 extends Application {
                 
                 expenses.setText(String.valueOf(
                         airfareInt + rentalFeesInt + parkingFeesInt 
-                        + taxiChargesInt + registrationFeesInt + lodgingChargesInt)
-                );
+                        + taxiChargesInt + registrationFeesInt + lodgingChargesInt
+                ));
                 
                 allowance.setText(String.valueOf(
                     Double.parseDouble(mealsReimbursal.getText()) +
@@ -153,14 +157,27 @@ public class Lab_04 extends Application {
                     Double.parseDouble(lodgingReimbursal.getText()) +
                     Double.parseDouble(fuelReimbursal.getText())
                 ));
+                
+                double excessDouble;
+                if (Double.parseDouble(expenses.getText()) - Double.parseDouble(allowance.getText()) > 0) {
+                    excessDouble = Double.parseDouble(expenses.getText()) - Double.parseDouble(allowance.getText());
+                } else {
+                    excessDouble = 0;
+                }
+                
+                excess.setText(String.valueOf(excessDouble));
+                
+                status.setText("Success!");
             } catch (NumberFormatException e) {
                 status.setText("Enter all, format correctly.");
             }
         });
         
         // ----SHOW SCENE----
-        Scene scene = new Scene(root, 600, 400);
+        Scene scene = new Scene(root, 720, 480);
+        scene.getStylesheets().add("style.css");
         
+        stage.setTitle("Travel Expense Calculator");
         stage.setScene(scene);
         stage.show();
     }
