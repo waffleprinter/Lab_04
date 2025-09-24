@@ -5,15 +5,18 @@
 package lab_04;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -79,6 +82,39 @@ public class Lab_04 extends Application {
         TextField lodgingCharges = new TextField();
         grid.add(lodgingChargesLabel, 0, 7);
         grid.add(lodgingCharges, 1, 7);
+        
+        // ----REIMBURSALS----
+        Label expensesLabel = new Label("Expenses: ");
+        Text expenses = new Text();
+        grid.add(expensesLabel, 2, 0);
+        grid.add(expenses, 3, 0);
+        
+        Label mealsReimbursalsLabel = new Label("Meals Reimbursal: ");
+        Text mealsReimbursal = new Text();
+        grid.add(mealsReimbursalsLabel, 2, 1);
+        grid.add(mealsReimbursal, 3, 1);
+        
+        Label parkingReimbursalLabel = new Label("Parking Reimbursal: ");
+        Text parkingReimbursal = new Text();
+        grid.add(parkingReimbursalLabel, 2, 2);
+        grid.add(parkingReimbursal, 3, 2);
+        
+        Label taxiReimbursalLabel = new Label("Taxi Reimbursal: ");
+        Text taxiReimbursal = new Text();
+        grid.add(taxiReimbursalLabel, 2, 3);
+        grid.add(taxiReimbursal, 3, 3);
+        
+        Label lodgingReimbursalLabel = new Label("Logdging Reimbursal: ");
+        Text lodgingReimbursal = new Text();
+        grid.add(lodgingReimbursalLabel, 2, 4);
+        grid.add(lodgingReimbursal, 3, 4);
+        
+        Label fuelReimbursalLabel = new Label("Fuel Reimbursal: ");
+        Text fuelReimbursal = new Text();
+        grid.add(fuelReimbursalLabel, 2, 5);
+        grid.add(fuelReimbursal, 3, 5);
+
+        
         
         // ----SHOW SCENE----
         Scene scene = new Scene(root);
