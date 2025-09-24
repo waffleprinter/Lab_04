@@ -84,8 +84,8 @@ public class Lab_04 extends Application {
         // ----REIMBURSALS----
         Label expensesLabel = new Label("Total expenses: ");
         Text expenses = new Text();
-        grid.add(expensesLabel, 2, 9);
-        grid.add(expenses, 3, 9);
+        grid.add(expensesLabel, 0, 8);
+        grid.add(expenses, 1, 8);
         
         Label mealsReimbursalsLabel = new Label("Meals Reimbursal: ");
         Text mealsReimbursal = new Text();
@@ -111,33 +111,55 @@ public class Lab_04 extends Application {
         Text fuelReimbursal = new Text();
         grid.add(fuelReimbursalLabel, 2, 3);
         grid.add(fuelReimbursal, 3, 3);
+        
+        Label allowanceLabel = new Label("Total allowance: ");
+        Text allowance = new Text();
+        grid.add(allowanceLabel, 2, 8);
+        grid.add(allowance, 3, 8);
 
         // ----CALCULATIONS----
         Button saveButton = new Button("Save");
+        Text status = new Text();
         grid.add(saveButton, 0, 9);
+        grid.add(status, 1, 9);
         
         saveButton.setOnAction((ActionEvent t) -> {
-            int daysInt = Integer.parseInt(days.getText());
-            int milesDrivenInt = Integer.parseInt(milesDriven.getText());
-            
-            mealsReimbursal.setText(String.valueOf(37.0 * daysInt));
-            parkingReimbursal.setText(String.valueOf(10.0 * daysInt));
-            taxiReimbursal.setText(String.valueOf(20.0 * daysInt));
-            lodgingReimbursal.setText(String.valueOf(95.0 * daysInt));
-            fuelReimbursal.setText(String.valueOf(0.27 * milesDrivenInt));
-            
-            expenses.setText(String.valueOf(
-                    Double.parseDouble(airfare.getText()) +
-                    Double.parseDouble(rentalFees.getText()) +
-                    Double.parseDouble(parkingFees.getText()) +
-                    Double.parseDouble(taxiCharges.getText()) +
-                    Double.parseDouble(registrationFees.getText()) +
-                    Double.parseDouble(lodgingCharges.getText())
-            ));
+            try {
+                int daysInt = Integer.parseInt(days.getText());
+                int airfareInt = Integer.parseInt(airfare.getText());
+                int rentalFeesInt = Integer.parseInt(rentalFees.getText());
+                int milesDrivenInt = Integer.parseInt(milesDriven.getText());
+                int parkingFeesInt = Integer.parseInt(parkingFees.getText());
+                int taxiChargesInt = Integer.parseInt(taxiCharges.getText());
+                int registrationFeesInt = Integer.parseInt(registrationFees.getText());
+                int lodgingChargesInt = Integer.parseInt(lodgingCharges.getText());
+                status.setText("Success!");
+                
+                mealsReimbursal.setText(String.valueOf(37.0 * daysInt));
+                parkingReimbursal.setText(String.valueOf(10.0 * daysInt));
+                taxiReimbursal.setText(String.valueOf(20.0 * daysInt));
+                lodgingReimbursal.setText(String.valueOf(95.0 * daysInt));
+                fuelReimbursal.setText(String.valueOf(0.27 * milesDrivenInt));
+                
+                expenses.setText(String.valueOf(
+                        airfareInt + rentalFeesInt + parkingFeesInt 
+                        + taxiChargesInt + registrationFeesInt + lodgingChargesInt)
+                );
+                
+                allowance.setText(String.valueOf(
+                    Double.parseDouble(mealsReimbursal.getText()) +
+                    Double.parseDouble(parkingReimbursal.getText()) +
+                    Double.parseDouble(taxiReimbursal.getText()) +
+                    Double.parseDouble(lodgingReimbursal.getText()) +
+                    Double.parseDouble(fuelReimbursal.getText())
+                ));
+            } catch (NumberFormatException e) {
+                status.setText("Enter all, format correctly.");
+            }
         });
         
         // ----SHOW SCENE----
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, 600, 400);
         
         stage.setScene(scene);
         stage.show();
