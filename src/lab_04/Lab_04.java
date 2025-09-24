@@ -6,14 +6,12 @@ package lab_04;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -53,7 +51,7 @@ public class Lab_04 extends Application {
         grid.add(airfareLabel, 0, 1);
         grid.add(airfare, 1, 1);
         
-        Label rentalFeesLabel = new Label("Rental fees: ");
+        Label rentalFeesLabel = new Label("Car rental fees: ");
         TextField rentalFees = new TextField();
         grid.add(rentalFeesLabel, 0, 2);
         grid.add(rentalFees, 1, 2);
@@ -84,37 +82,59 @@ public class Lab_04 extends Application {
         grid.add(lodgingCharges, 1, 7);
         
         // ----REIMBURSALS----
-        Label expensesLabel = new Label("Expenses: ");
+        Label expensesLabel = new Label("Total expenses: ");
         Text expenses = new Text();
-        grid.add(expensesLabel, 2, 0);
-        grid.add(expenses, 3, 0);
+        grid.add(expensesLabel, 2, 9);
+        grid.add(expenses, 3, 9);
         
         Label mealsReimbursalsLabel = new Label("Meals Reimbursal: ");
         Text mealsReimbursal = new Text();
-        grid.add(mealsReimbursalsLabel, 2, 1);
-        grid.add(mealsReimbursal, 3, 1);
+        grid.add(mealsReimbursalsLabel, 2, 0);
+        grid.add(mealsReimbursal, 3, 0);
         
         Label parkingReimbursalLabel = new Label("Parking Reimbursal: ");
         Text parkingReimbursal = new Text();
-        grid.add(parkingReimbursalLabel, 2, 2);
-        grid.add(parkingReimbursal, 3, 2);
+        grid.add(parkingReimbursalLabel, 2, 4);
+        grid.add(parkingReimbursal, 3, 4);
         
         Label taxiReimbursalLabel = new Label("Taxi Reimbursal: ");
         Text taxiReimbursal = new Text();
-        grid.add(taxiReimbursalLabel, 2, 3);
-        grid.add(taxiReimbursal, 3, 3);
+        grid.add(taxiReimbursalLabel, 2, 5);
+        grid.add(taxiReimbursal, 3, 5);
         
-        Label lodgingReimbursalLabel = new Label("Logdging Reimbursal: ");
+        Label lodgingReimbursalLabel = new Label("Lodging Reimbursal: ");
         Text lodgingReimbursal = new Text();
-        grid.add(lodgingReimbursalLabel, 2, 4);
-        grid.add(lodgingReimbursal, 3, 4);
+        grid.add(lodgingReimbursalLabel, 2, 7);
+        grid.add(lodgingReimbursal, 3, 7);
         
         Label fuelReimbursalLabel = new Label("Fuel Reimbursal: ");
         Text fuelReimbursal = new Text();
-        grid.add(fuelReimbursalLabel, 2, 5);
-        grid.add(fuelReimbursal, 3, 5);
+        grid.add(fuelReimbursalLabel, 2, 3);
+        grid.add(fuelReimbursal, 3, 3);
 
+        // ----CALCULATIONS----
+        Button saveButton = new Button("Save");
+        grid.add(saveButton, 0, 9);
         
+        saveButton.setOnAction((ActionEvent t) -> {
+            int daysInt = Integer.parseInt(days.getText());
+            int milesDrivenInt = Integer.parseInt(milesDriven.getText());
+            
+            mealsReimbursal.setText(String.valueOf(37.0 * daysInt));
+            parkingReimbursal.setText(String.valueOf(10.0 * daysInt));
+            taxiReimbursal.setText(String.valueOf(20.0 * daysInt));
+            lodgingReimbursal.setText(String.valueOf(95.0 * daysInt));
+            fuelReimbursal.setText(String.valueOf(0.27 * milesDrivenInt));
+            
+            expenses.setText(String.valueOf(
+                    Double.parseDouble(airfare.getText()) +
+                    Double.parseDouble(rentalFees.getText()) +
+                    Double.parseDouble(parkingFees.getText()) +
+                    Double.parseDouble(taxiCharges.getText()) +
+                    Double.parseDouble(registrationFees.getText()) +
+                    Double.parseDouble(lodgingCharges.getText())
+            ));
+        });
         
         // ----SHOW SCENE----
         Scene scene = new Scene(root);
